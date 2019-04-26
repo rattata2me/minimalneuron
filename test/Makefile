@@ -9,13 +9,15 @@ INCLUDE_DIRECTORY = include
 SOURCE_DIRECTORY = source
 BUILD_DIRECTORY = build
 
-CFLAGS = -I$(INCLUDE_DIRECTORY) -I$(INCLUDE_LIBRARY) -g -Wall -Werror -pedantic std=gnu11
+CFLAGS = -I$(INCLUDE_DIRECTORY) -I$(INCLUDE_LIBRARY) -g -Wall -Werror -pedantic -std=gnu11
 
 _OBJECT_FILES = main.o
 
-LIBS = -lm -lmnneuron -L$(LIBRARY_DIRECTORY)
+OBJ = $(patsubst %,$(BUILD_DIRECTORY)/%,$(_OBJECT_FILES))
 
-all: main
+LIBS = -lm -L$(LIBRARY_DIRECTORY) -lminneuron
+
+all: makebuild library main
 
 .PHONY: makebuild
 
@@ -27,7 +29,7 @@ makebuild:
 library:
 	cd $(LIBRARY_DIRECTORY)/.. && make all
 
-$(BUILD_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.c makebuild library
+$(BUILD_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)

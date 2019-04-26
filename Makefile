@@ -22,7 +22,7 @@ all: main
 makebuild:
 	@mkdir -p build
 
-LIB_NAME = libminneuron
+LIB_NAME = libminneuron.a
 
 LIBS = -L$(MI_LIBRARY) -lminneuron
 
