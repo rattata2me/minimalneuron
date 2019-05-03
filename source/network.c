@@ -1,5 +1,7 @@
 #include "network.h"
 
+#define NUMBER_E 2.718281828459045
+
 double random_value(){
 	return (((double)rand())/RAND_MAX);
 }
@@ -45,6 +47,7 @@ double * feedforward(double * input, Minimal_Network * network){
 			for(size_t k = 0; k < network->config[i-1]; k++){
 				current[j] += input[k]*network->layers[i-1].weights[j*network->config[i-1]+k];
 			}
+			current[j] = sigmoid(current[j]);
 		}
 		free(input);
 		input = current;
@@ -52,6 +55,11 @@ double * feedforward(double * input, Minimal_Network * network){
 
 	return input;
 }
+
+double sigmoid(double x){
+	return 1.0 / (1.0-pow(NUMBER_E, -x));
+}
+
 
 void destroy_minimal_neuron(){
 

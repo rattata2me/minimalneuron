@@ -8,7 +8,7 @@ SOURCE_DIRECTORY = source
 BUILD_DIRECTORY = build
 
 
-CFLAGS = -I$(INCLUDE_DIRECTORY) -g -Wall -Werror -pedantic -std=gnu11
+CFLAGS = -I$(INCLUDE_DIRECTORY) -g -Wall -Werror -pedantic -std=gnu11 -lm
 
 _OBJECT_FILES = network.o
 
@@ -24,7 +24,7 @@ makebuild:
 
 LIB_NAME = libminneuron.a
 
-LIBS = -L$(MI_LIBRARY) -lminneuron
+LIBS = -lmath
 
 
 $(BUILD_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.c makebuild
