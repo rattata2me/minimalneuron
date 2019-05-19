@@ -34,7 +34,6 @@ Minimal_Network * create_minimal_neuron(size_t * config, size_t config_size){
 	}
 
 	return network;
-
 }
 
 // Feedforward method
@@ -57,9 +56,12 @@ double * feedforward(double * input, Minimal_Network * network){
 }
 
 double sigmoid(double x){
-	return 1.0 / (1.0-pow(NUMBER_E, -x));
+	return 1.0 / (1.0+pow(NUMBER_E, -x));
 }
 
+double sigmoid_prime(double x){
+	return (sigmoid(x)*(1-sigmoid(x));
+}
 
 void destroy_minimal_neuron(){
 
