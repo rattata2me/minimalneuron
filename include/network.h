@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct{
 	
@@ -29,5 +30,6 @@ double * feedforward(double * input, Minimal_Network * network);
 
 void destroy_minimal_neuron();
 
+double sigmoid(double value);
 
 #endif
