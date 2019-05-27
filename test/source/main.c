@@ -2,6 +2,33 @@
 #include "network.h"
 #include <stdlib.h>
 
+
+#define D_SIZE 50000
+
+int * load_mnist_index(){
+
+	FILE * file = fopen("index.bin", "r");
+	
+	int * data = malloc(sizeof(int)*D_SIZE);
+	fread(data, sizeof(int), D_SIZE, file);
+
+	fclose(file);
+
+	return data;
+}
+
+double * load_mnist_data(){
+
+	FILE * file = fopen("images.bin", "r");
+
+	double * data = malloc(sizeof(double)*28*28*D_SIZE);
+	fread(data, sizeof(double), 28*28*D_SIZE, file);
+
+	fclose(file);
+	
+	return data;
+}
+
 Minimal_Network * load_from_file(){
 	
 	FILE * file = fopen("weights.txt", "r");
@@ -84,6 +111,11 @@ int main(){
 	}
 	printf("\nEl numero es el %i!\n", indexmax);
 	
+	double * data = load_mnist_data();
+	int * index = load_mnist_index();
+
+	free(data);
+	free(index);
 
 	return 0;
 }
